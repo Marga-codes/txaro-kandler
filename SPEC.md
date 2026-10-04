@@ -20,7 +20,6 @@ Portfolio web profesional para **Txaro Kandler**, actriz española con trayector
 | Ano | Titulo | Tipo | Personaje |
 |-----|--------|------|-----------|
 | 2024 | El Hoyo 2 (The Platform 2) | Pelicula | Barbara |
-| 2021-2023 | Cardo | Serie TV | - |
 | 2024 | Santuario | Serie TV | - |
 
 ### Teatro

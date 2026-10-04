@@ -119,3 +119,13 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowLeft') navigateLightbox(-1);
   if (e.key === 'ArrowRight') navigateLightbox(1);
 });
+
+// CONTACTO (envio pendiente de conectar): validacion nativa + sin recarga
+const contactForm = document.getElementById('contact-form');
+if (contactForm) {
+  const formNote = document.getElementById('form-note');
+  contactForm.addEventListener('submit', e => {
+    e.preventDefault();
+    if (formNote) formNote.textContent = 'Formulario listo: falta conectar el servicio de envío.';
+  });
+}
