@@ -123,13 +123,67 @@ const contactForm = document.getElementById('contact-form');
 if (contactForm) {
   const formNote = document.getElementById('form-note');
   const submitBtn = contactForm.querySelector('.form-submit');
+  const emailInput = contactForm.querySelector('#email');
+  const DISPOSABLE = new Set(['mailinator.com', '10minutemail.com', 'guerrillamail.com', 'yopmail.com', 'tempmail.com', 'temp-mail.org', 'trashmail.com', 'sharklasers.com', 'getnada.com', 'dispostable.com', 'maildrop.cc']);
+
+  const emailFormatOk = v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+
+  async function domainReceivesMail(domain) {
+    const query = async type => {
+      const r = await fetch('https://dns.google/resolve?name=' + encodeURIComponent(domain) + '&type=' + type);
+      if (!r.ok) throw new Error('dns');
+      return (await r.json()).Answer || [];
+    };
+    if ((await query('MX')).length) return true;  // tiene servidores de correo
+    if ((await query('A')).length) return true;   // dominio existe (MX implicito)
+    return false;
+  }
+
+  async function emailError(v) {
+    const domain = v.split('@')[1].toLowerCase();
+    if (DISPOSABLE.has(domain)) return 'No se aceptan direcciones de email temporales.';
+    try {
+      if (!(await domainReceivesMail(domain))) return 'Ese dominio de email no existe o no puede recibir mensajes. Revisa la dirección.';
+    } catch (err) {
+      return null; // sin conexión al DNS: no bloqueamos el envío
+    }
+    return null;
+  }
+
+  const setNote = (msg, isError) => {
+    if (!formNote) return;
+    formNote.textContent = msg;
+    formNote.classList.toggle('is-error', !!isError);
+  };
+
   contactForm.addEventListener('submit', async e => {
     e.preventDefault();
     if (contactForm.querySelector('[name="_honey"]').value) return; // bot
     const btnLabel = submitBtn.firstChild;
+
+    // Verificacion del email: formato + dominio real con DNS
+    const emailVal = emailInput.value.trim();
+    if (!emailFormatOk(emailVal)) {
+      emailInput.setAttribute('aria-invalid', 'true');
+      emailInput.focus();
+      setNote('Introduce un email válido (nombre@dominio.com).', true);
+      return;
+    }
+    submitBtn.disabled = true;
+    btnLabel.textContent = 'Verificando… ';
+    const emailErr = await emailError(emailVal);
+    if (emailErr) {
+      submitBtn.disabled = false;
+      btnLabel.textContent = 'Enviar mensaje';
+      emailInput.setAttribute('aria-invalid', 'true');
+      setNote(emailErr, true);
+      return;
+    }
+    emailInput.removeAttribute('aria-invalid');
+
     submitBtn.disabled = true;
     btnLabel.textContent = 'Enviando… ';
-    if (formNote) { formNote.textContent = ''; }
+    setNote('', false);
     try {
       const data = Object.fromEntries(new FormData(contactForm).entries());
       const res = await fetch('https://formsubmit.co/ajax/txarokandler@gmail.com', {
@@ -139,12 +193,17 @@ if (contactForm) {
       });
       if (!res.ok) throw new Error(res.status);
       contactForm.reset();
-      if (formNote) formNote.textContent = 'Mensaje enviado. Te responderé lo antes posible.';
+      setNote('Mensaje enviado. Te responderé lo antes posible.', false);
     } catch (err) {
-      if (formNote) formNote.textContent = 'No se pudo enviar. Escríbeme directamente a txarokandler@gmail.com o por WhatsApp.';
+      setNote('No se pudo enviar. Escríbeme directamente a txarokandler@gmail.com o por WhatsApp.', true);
     } finally {
       submitBtn.disabled = false;
       btnLabel.textContent = 'Enviar mensaje';
     }
+  });
+
+  emailInput.addEventListener('input', () => {
+    emailInput.removeAttribute('aria-invalid');
+    if (formNote && formNote.classList.contains('is-error')) setNote('', false);
   });
 }
