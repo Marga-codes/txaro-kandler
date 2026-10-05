@@ -113,8 +113,11 @@ section { padding: clamp(3.5rem, 7vh, 5rem) 6rem; }
 .showreel-text { text-align: left; padding-right: 2rem; }
 .showreel .section-label { color: var(--accent-strong); }
 .showreel .section-title { font-size: clamp(1.5rem, 2.2vw, 2rem); color: var(--text); margin-bottom: 1rem; }
+.showreel-head { text-align: center; margin-bottom: 1.25rem; }
+.showreel-head .section-title { margin-bottom: 0; }
 .showreel-placeholder { max-width: 40rem; margin: 0 auto; aspect-ratio: 16 / 9; background: #111; overflow: hidden; }
 .showreel-placeholder video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.showreel-placeholder iframe { width: 100%; height: 100%; display: block; border: 0; }
 .showreel .section-title em { color: var(--accent-strong); }
 .showreel-desc { font-size: 0.92rem; font-weight: 300; line-height: 1.7; color: var(--text-muted); max-width: 44ch; }
 .showreel-meta { display: flex; flex-wrap: wrap; gap: 1.25rem; margin-top: 1.75rem; padding-top: 1.25rem; border-top: 1px solid rgba(26,26,26,0.08); }
