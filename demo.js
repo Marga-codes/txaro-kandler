@@ -118,12 +118,33 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') navigateLightbox(1);
 });
 
-// CONTACTO (envio pendiente de conectar): validacion nativa + sin recarga
+// CONTACTO: envio via FormSubmit (AJAX) a txarokandler@gmail.com
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
   const formNote = document.getElementById('form-note');
-  contactForm.addEventListener('submit', e => {
+  const submitBtn = contactForm.querySelector('.form-submit');
+  contactForm.addEventListener('submit', async e => {
     e.preventDefault();
-    if (formNote) formNote.textContent = 'Formulario listo: falta conectar el servicio de envío.';
+    if (contactForm.querySelector('[name="_honey"]').value) return; // bot
+    const btnLabel = submitBtn.firstChild;
+    submitBtn.disabled = true;
+    btnLabel.textContent = 'Enviando… ';
+    if (formNote) { formNote.textContent = ''; }
+    try {
+      const data = Object.fromEntries(new FormData(contactForm).entries());
+      const res = await fetch('https://formsubmit.co/ajax/txarokandler@gmail.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      if (!res.ok) throw new Error(res.status);
+      contactForm.reset();
+      if (formNote) formNote.textContent = 'Mensaje enviado. Te responderé lo antes posible.';
+    } catch (err) {
+      if (formNote) formNote.textContent = 'No se pudo enviar. Escríbeme directamente a txarokandler@gmail.com o por WhatsApp.';
+    } finally {
+      submitBtn.disabled = false;
+      btnLabel.textContent = 'Enviar mensaje';
+    }
   });
 }
