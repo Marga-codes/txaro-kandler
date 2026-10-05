@@ -44,26 +44,24 @@ mobileMenu.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', () => toggleMenu(false));
 });
 
-// SHOWREEL EMBED
-const showreelVideo = document.getElementById('showreel-video');
-const showreelPlayer = document.getElementById('showreel-player');
-
-function playShowreel() {
-  if (!showreelVideo || !showreelPlayer || showreelVideo.classList.contains('playing')) return;
-  showreelPlayer.controls = true;
-  showreelPlayer.play();
-  showreelVideo.classList.add('playing');
-}
-
-if (showreelVideo) {
-  showreelVideo.addEventListener('click', playShowreel);
-  showreelVideo.addEventListener('keydown', e => {
+// TIRAS DE VIDEO (showreel / backstage): clic para reproducir
+document.querySelectorAll('.showreel-video').forEach(strip => {
+  const player = strip.querySelector('video');
+  if (!player) return;
+  const play = () => {
+    if (strip.classList.contains('playing')) return;
+    player.controls = true;
+    player.play();
+    strip.classList.add('playing');
+  };
+  strip.addEventListener('click', play);
+  strip.addEventListener('keydown', e => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
-      playShowreel();
+      play();
     }
   });
-}
+});
 
 // LIGHTBOX GALERIA
 const galleryItems = [...document.querySelectorAll('.g-item img')];
