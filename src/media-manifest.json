@@ -1,0 +1,429 @@
+{
+  "/media/img/about-txaro.webp": {
+    "width": 896,
+    "height": 1344,
+    "bytes": 115688,
+    "srcBytes": 150027,
+    "ext": "webp"
+  },
+  "/media/img/cardo-poster.webp": {
+    "width": 827,
+    "height": 1169,
+    "bytes": 109124,
+    "srcBytes": 151457,
+    "ext": "webp"
+  },
+  "/media/img/el-hoyo-2-poster.webp": {
+    "width": 260,
+    "height": 384,
+    "bytes": 12838,
+    "srcBytes": 87343,
+    "ext": "webp"
+  },
+  "/media/img/hambre-cartel.webp": {
+    "width": 390,
+    "height": 560,
+    "bytes": 17410,
+    "srcBytes": 38928,
+    "ext": "webp"
+  },
+  "/media/img/hambre-prensa-1.webp": {
+    "width": 1063,
+    "height": 660,
+    "bytes": 26504,
+    "srcBytes": 65178,
+    "ext": "webp"
+  },
+  "/media/img/hambre-retrato.webp": {
+    "width": 1063,
+    "height": 671,
+    "bytes": 32438,
+    "srcBytes": 69561,
+    "ext": "webp"
+  },
+  "/media/img/hambre-teatro-3.webp": {
+    "width": 1100,
+    "height": 733,
+    "bytes": 37778,
+    "srcBytes": 149874,
+    "ext": "webp"
+  },
+  "/media/img/Hambre_Cartel.webp": {
+    "width": 900,
+    "height": 1216,
+    "bytes": 67776,
+    "srcBytes": 340450,
+    "ext": "webp"
+  },
+  "/media/img/ig-profile/txaro-accionactores-2025.webp": {
+    "width": 625,
+    "height": 539,
+    "bytes": 46890,
+    "srcBytes": 53362,
+    "ext": "webp"
+  },
+  "/media/img/ig-profile/txaro-backstage-2017.webp": {
+    "width": 640,
+    "height": 640,
+    "bytes": 157692,
+    "srcBytes": 161494,
+    "ext": "webp"
+  },
+  "/media/img/ig-profile/txaro-pop-happy-mondays-2024.webp": {
+    "width": 513,
+    "height": 640,
+    "bytes": 21732,
+    "srcBytes": 31695,
+    "ext": "webp"
+  },
+  "/media/img/ig-profile/txaro-retrato-2020.webp": {
+    "width": 512,
+    "height": 341,
+    "bytes": 19578,
+    "srcBytes": 26810,
+    "ext": "webp"
+  },
+  "/media/img/ig-profile/txaro-teatro-2020.webp": {
+    "width": 640,
+    "height": 640,
+    "bytes": 42670,
+    "srcBytes": 54403,
+    "ext": "webp"
+  },
+  "/media/img/santuario-poster.webp": {
+    "width": 857,
+    "height": 1200,
+    "bytes": 69152,
+    "srcBytes": 115133,
+    "ext": "webp"
+  },
+  "/media/img/txaro-hero.webp": {
+    "width": 1200,
+    "height": 1800,
+    "bytes": 125022,
+    "srcBytes": 265905,
+    "ext": "webp"
+  },
+  "/media/img/txaro-spot.webp": {
+    "width": 1600,
+    "height": 1067,
+    "bytes": 172494,
+    "srcBytes": 293515,
+    "ext": "webp"
+  },
+  "/media/img/Txaro_Kandler_0.webp": {
+    "width": 1600,
+    "height": 2400,
+    "bytes": 221668,
+    "srcBytes": 11528035,
+    "ext": "webp"
+  },
+  "/media/img/Txaro_Kandler_2.webp": {
+    "width": 1344,
+    "height": 896,
+    "bytes": 112046,
+    "srcBytes": 138343,
+    "ext": "webp"
+  },
+  "/media/img/Txaro_Kandler_3.webp": {
+    "width": 896,
+    "height": 1344,
+    "bytes": 115688,
+    "srcBytes": 150027,
+    "ext": "webp"
+  },
+  "/media/img/Txaro_Kendler_1.webp": {
+    "width": 1344,
+    "height": 896,
+    "bytes": 117904,
+    "srcBytes": 168075,
+    "ext": "webp"
+  },
+  "/media/img/Txaro_Moaba_CinemaTv.webp": {
+    "width": 1600,
+    "height": 1066,
+    "bytes": 165208,
+    "srcBytes": 12199025,
+    "ext": "webp"
+  },
+  "/media/img/web-facebook/txaro-entrevista-genteconduende.webp": {
+    "width": 187,
+    "height": 269,
+    "bytes": 5900,
+    "srcBytes": 8549,
+    "ext": "webp"
+  },
+  "/media/img/web-verkami/002-.webp": {
+    "width": 745,
+    "height": 419,
+    "bytes": 19874,
+    "srcBytes": 48025,
+    "ext": "webp"
+  },
+  "/media/img/web-verkami/003-.webp": {
+    "width": 745,
+    "height": 559,
+    "bytes": 36264,
+    "srcBytes": 80655,
+    "ext": "webp"
+  },
+  "/media/img/web-verkami/004-.webp": {
+    "width": 745,
+    "height": 419,
+    "bytes": 24166,
+    "srcBytes": 43747,
+    "ext": "webp"
+  },
+  "/media/img/web-verkami/005-.webp": {
+    "width": 745,
+    "height": 448,
+    "bytes": 48266,
+    "srcBytes": 68473,
+    "ext": "webp"
+  },
+  "/media/img/web-verkami/006-.webp": {
+    "width": 745,
+    "height": 1115,
+    "bytes": 26726,
+    "srcBytes": 56811,
+    "ext": "webp"
+  },
+  "/media/img/web-verkami/007-.webp": {
+    "width": 745,
+    "height": 1093,
+    "bytes": 46846,
+    "srcBytes": 120474,
+    "ext": "webp"
+  },
+  "/media/img/web-verkami/009-.webp": {
+    "width": 667,
+    "height": 1000,
+    "bytes": 61260,
+    "srcBytes": 125741,
+    "ext": "webp"
+  },
+  "/media/img/web-verkami/010-.webp": {
+    "width": 745,
+    "height": 745,
+    "bytes": 27184,
+    "srcBytes": 60789,
+    "ext": "webp"
+  },
+  "/media/img/web-verkami/011-.webp": {
+    "width": 745,
+    "height": 497,
+    "bytes": 9960,
+    "srcBytes": 23554,
+    "ext": "webp"
+  },
+  "/media/img/web-verkami/012-.webp": {
+    "width": 745,
+    "height": 513,
+    "bytes": 17308,
+    "srcBytes": 35766,
+    "ext": "webp"
+  },
+  "/media/img/web-verkami/013-.webp": {
+    "width": 745,
+    "height": 497,
+    "bytes": 20990,
+    "srcBytes": 47028,
+    "ext": "webp"
+  },
+  "/media/img/web-verkami/014-.webp": {
+    "width": 745,
+    "height": 501,
+    "bytes": 24570,
+    "srcBytes": 47762,
+    "ext": "webp"
+  },
+  "/media/img/web-verkami/015-.webp": {
+    "width": 745,
+    "height": 766,
+    "bytes": 11882,
+    "srcBytes": 32366,
+    "ext": "webp"
+  },
+  "/media/img/web-verkami/016-.webp": {
+    "width": 745,
+    "height": 745,
+    "bytes": 54084,
+    "srcBytes": 91921,
+    "ext": "webp"
+  },
+  "/media/img/web-verkami/017-.webp": {
+    "width": 745,
+    "height": 931,
+    "bytes": 46496,
+    "srcBytes": 83690,
+    "ext": "webp"
+  },
+  "/media/img/web-verkami/018-.webp": {
+    "width": 745,
+    "height": 294,
+    "bytes": 11236,
+    "srcBytes": 29116,
+    "ext": "webp"
+  },
+  "/media/img/web-verkami/019-.webp": {
+    "width": 745,
+    "height": 559,
+    "bytes": 74988,
+    "srcBytes": 107084,
+    "ext": "webp"
+  },
+  "/media/img/web-verkami/020-.webp": {
+    "width": 745,
+    "height": 419,
+    "bytes": 46744,
+    "srcBytes": 69849,
+    "ext": "webp"
+  },
+  "/media/img/web-verkami/021-.webp": {
+    "width": 745,
+    "height": 559,
+    "bytes": 73066,
+    "srcBytes": 104760,
+    "ext": "webp"
+  },
+  "/media/img/web-verkami/022-.webp": {
+    "width": 512,
+    "height": 277,
+    "bytes": 19508,
+    "srcBytes": 34296,
+    "ext": "webp"
+  },
+  "/media/img/web-verkami/023-.webp": {
+    "width": 670,
+    "height": 670,
+    "bytes": 20952,
+    "srcBytes": 41555,
+    "ext": "webp"
+  },
+  "/media/img/web-verkami/024-.webp": {
+    "width": 745,
+    "height": 419,
+    "bytes": 56660,
+    "srcBytes": 79693,
+    "ext": "webp"
+  },
+  "/media/img/web-verkami/025-.webp": {
+    "width": 745,
+    "height": 1118,
+    "bytes": 120218,
+    "srcBytes": 216189,
+    "ext": "webp"
+  },
+  "/media/img/web-verkami/026-.webp": {
+    "width": 646,
+    "height": 388,
+    "bytes": 128618,
+    "srcBytes": 197518,
+    "ext": "webp"
+  },
+  "/media/img/web-verkami/027-.webp": {
+    "width": 640,
+    "height": 360,
+    "bytes": 42770,
+    "srcBytes": 72756,
+    "ext": "webp"
+  },
+  "/media/img/web-verkami/Txaro_Kandler.webp": {
+    "width": 720,
+    "height": 540,
+    "bytes": 26400,
+    "srcBytes": 49228,
+    "ext": "webp"
+  },
+  "/media/img/WhatsApp-Image-2026-08-23-at-13-48-08-copy.webp": {
+    "width": 1516,
+    "height": 2048,
+    "bytes": 188982,
+    "srcBytes": 340450,
+    "ext": "webp"
+  },
+  "/media/img/WhatsApp-Image-2026-08-23-at-13-48-08.webp": {
+    "width": 1516,
+    "height": 2048,
+    "bytes": 188982,
+    "srcBytes": 340450,
+    "ext": "webp"
+  },
+  "/media/Txaro_Fotos/captura-reel-director-david-ontoria.webp": {
+    "width": 956,
+    "height": 2048,
+    "bytes": 63300,
+    "srcBytes": 117907,
+    "ext": "webp"
+  },
+  "/media/Txaro_Fotos/Hambre_Cartel.webp": {
+    "width": 900,
+    "height": 1216,
+    "bytes": 67776,
+    "srcBytes": 340450,
+    "ext": "webp"
+  },
+  "/media/Txaro_Fotos/retrato-actriz-txaro-kandler.webp": {
+    "width": 1600,
+    "height": 2400,
+    "bytes": 221668,
+    "srcBytes": 11528035,
+    "ext": "webp"
+  },
+  "/media/Txaro_Fotos/txaro-kandler-actriz-en-barco-01.webp": {
+    "width": 1600,
+    "height": 1066,
+    "bytes": 112550,
+    "srcBytes": 180851,
+    "ext": "webp"
+  },
+  "/media/Txaro_Fotos/txaro-kandler-actriz-en-barco-02.webp": {
+    "width": 1600,
+    "height": 1066,
+    "bytes": 109426,
+    "srcBytes": 171840,
+    "ext": "webp"
+  },
+  "/media/Txaro_Fotos/txaro-kandler-actriz-en-barco-03.webp": {
+    "width": 1330,
+    "height": 688,
+    "bytes": 49940,
+    "srcBytes": 82161,
+    "ext": "webp"
+  },
+  "/media/Txaro_Fotos/txaro-kandler-actriz-en-barco-04.webp": {
+    "width": 1600,
+    "height": 1066,
+    "bytes": 88544,
+    "srcBytes": 144763,
+    "ext": "webp"
+  },
+  "/media/Txaro_Fotos/txaro-kandler-backstage-actriz.webp": {
+    "width": 896,
+    "height": 1344,
+    "bytes": 115688,
+    "srcBytes": 150027,
+    "ext": "webp"
+  },
+  "/media/Txaro_Fotos/txaro-kandler-moaba-cinema-tv.webp": {
+    "width": 1600,
+    "height": 1066,
+    "bytes": 165208,
+    "srcBytes": 12199025,
+    "ext": "webp"
+  },
+  "/media/Txaro_Fotos/txaro-kandler-sesion-fotografica.webp": {
+    "width": 1344,
+    "height": 896,
+    "bytes": 112046,
+    "srcBytes": 138343,
+    "ext": "webp"
+  },
+  "/media/Txaro_Fotos/Txaro_Kendler_1.webp": {
+    "width": 1344,
+    "height": 896,
+    "bytes": 117904,
+    "srcBytes": 168075,
+    "ext": "webp"
+  }
+}
