@@ -1,3 +1,4 @@
+import { hero } from '../content'
 import { Img } from './Primitives'
 
 export function Hero() {
@@ -12,14 +13,13 @@ export function Hero() {
       </div>
       <div className="hero-inner shell">
         <div className="reveal">
+          <p className="hero-eyebrow">{hero.eyebrow}</p>
           <h1 className="hero-name">
             Txaro
             <br />
             <em>Kandler</em>
           </h1>
-          <p className="hero-sub">
-            Actriz de cine, televisión y teatro. El Hoyo 2, Santuario y Hambre.
-          </p>
+          <p className="hero-sub">{hero.subtitle}</p>
           <a className="hero-cta" href="#credits">
             Ver trabajos
           </a>

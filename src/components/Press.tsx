@@ -17,11 +17,8 @@ export function Press() {
 
         <div className="press-body">
           <div className="section-head">
+            <p className="section-label">Prensa</p>
             <h2 className="section-title">Lo que dice la crítica</h2>
-            <p className="section-intro">
-              La prensa sobre Hambre, la obra con la que Viviana López Doynel
-              lleva al escenario la voz de Carolina María de Jesús.
-            </p>
           </div>
 
           <div className="press-grid">

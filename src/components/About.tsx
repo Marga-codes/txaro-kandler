@@ -16,6 +16,7 @@ export function About() {
 
         <Reveal delay={120}>
           <div className="section-head">
+            <p className="section-label">Sobre mí</p>
             <h2 className="section-title">
               Una actriz de <em>presencia incontestable</em>
             </h2>

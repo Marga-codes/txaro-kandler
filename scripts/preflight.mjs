@@ -173,7 +173,9 @@ const r = await page.evaluate(() => {
     })(),
   }))
 
-  const placeholders = ['#757570'].map(c => +ratio(c, bgOf($('input[name="name"]'))).toFixed(2))
+  const nameInput = $('input[name="name"]')
+  const phColor = getComputedStyle(nameInput, '::placeholder').color
+  const placeholders = [+ratio(phColor, bgOf(nameInput)).toFixed(2)]
   const labelColor = cs($('label[for="name"]')).color
   const labelContraste = +ratio(labelColor, bgOf($('label[for="name"]'))).toFixed(2)
 

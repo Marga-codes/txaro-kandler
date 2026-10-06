@@ -97,6 +97,7 @@ export function Contact() {
       <div className="shell contact-inner">
         <Reveal>
           <div className="section-head">
+            <p className="section-label">Contacto</p>
             <h2 className="section-title">
               Trabajemos <em>juntos</em>
             </h2>
@@ -120,7 +121,14 @@ export function Contact() {
 
             <div className="field">
               <label htmlFor="name">Nombre</label>
-              <input id="name" name="name" type="text" autoComplete="name" required />
+              <input
+                id="name"
+                name="name"
+                type="text"
+                placeholder="Tu nombre"
+                autoComplete="name"
+                required
+              />
             </div>
 
             <div className="field">
@@ -129,6 +137,7 @@ export function Contact() {
                 id="email"
                 name="email"
                 type="email"
+                placeholder="tu@email.com"
                 autoComplete="email"
                 required
                 aria-invalid={emailError ? 'true' : undefined}
@@ -143,7 +152,13 @@ export function Contact() {
 
             <div className="field">
               <label htmlFor="message">Mensaje</label>
-              <textarea id="message" name="message" rows={4} required />
+              <textarea
+                id="message"
+                name="message"
+                rows={4}
+                placeholder="Cuéntame sobre tu proyecto..."
+                required
+              />
             </div>
 
             <button className="form-submit" type="submit" disabled={status === 'sending'}>

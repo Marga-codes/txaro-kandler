@@ -8,6 +8,12 @@ export const nav = [
   { label: 'Contacto', href: '#contact' },
 ]
 
+export const hero = {
+  eyebrow: 'Actriz | Madrid',
+  subtitle:
+    'Actriz de cine, televisión y teatro. Conocida por El Hoyo 2, Santuario y Hambre. Formada con los maestros Rubens Correa, Lorenzo Quinteros y Silvia Vladimivsky.',
+}
+
 export const social = [
   { label: 'Instagram', href: 'https://www.instagram.com/txarokandler/' },
   { label: 'IMDb', href: 'https://www.imdb.com/name/nm14579927/' },
@@ -94,31 +100,50 @@ export const gallery = [
   {
     src: '/media/img/Txaro_Moaba_CinemaTv.webp',
     alt: 'Txaro Kandler durante un rodaje para Moaba Cinema TV',
+    cap: 'Moaba Cinema TV',
+    capEm: 'Rodaje',
   },
   {
     src: '/media/img/Txaro_Kandler_2.webp',
     alt: 'Txaro Kandler, sesión fotográfica',
+    cap: 'Archivo',
+    capEm: '',
   },
-  { src: '/media/img/txaro-hero.webp', alt: 'Retrato de Txaro Kandler' },
+  {
+    src: '/media/img/txaro-hero.webp',
+    alt: 'Retrato de Txaro Kandler',
+    cap: 'Retrato',
+    capEm: '',
+  },
   {
     src: '/media/img/ig-profile/txaro-teatro-2020.webp',
     alt: 'Txaro Kandler en escena teatral, 2020',
+    cap: 'Teatro',
+    capEm: '2020',
   },
   {
     src: '/media/img/ig-profile/txaro-accionactores-2025.webp',
     alt: 'Txaro Kandler en AccionActores, 2025',
+    cap: 'AccionActores',
+    capEm: '2025',
   },
   {
     src: '/media/img/ig-profile/txaro-backstage-2017.webp',
     alt: 'Txaro Kandler backstage, 2017',
+    cap: 'Backstage',
+    capEm: '2017',
   },
   {
     src: '/media/img/ig-profile/txaro-retrato-2020.webp',
     alt: 'Retrato de Txaro Kandler, 2020',
+    cap: 'Retrato',
+    capEm: '2020',
   },
   {
     src: '/media/img/ig-profile/txaro-pop-happy-mondays-2024.webp',
     alt: 'Txaro Kandler en Happy Mondays, 2024',
+    cap: 'Happy Mondays',
+    capEm: '2024',
   },
 ]
 

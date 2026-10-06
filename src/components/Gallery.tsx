@@ -47,16 +47,22 @@ export function Gallery() {
     <section className="section gallery" id="gallery">
       <div className="shell">
         <div className="section-head reveal">
+          <p className="section-label">Galería</p>
           <h2 className="section-title">Retratos y momentos</h2>
           <p className="section-intro">
-            Rodaje, escenario y retrato. Fragmentos del oficio entre la cámara
-            y las tablas.
+            Rodaje, escenario y retrato: fragmentos del oficio de Txaro entre la
+            cámara y las tablas.
           </p>
         </div>
 
         <div className="gallery-grid">
           {gallery.map((g, i) => (
-            <Reveal key={g.src} delay={i * 60} className={`gallery-item g${i + 1}`}>
+            <Reveal
+              as="figure"
+              key={g.src}
+              delay={i * 60}
+              className={`gallery-item g${i + 1}`}
+            >
               <button
                 type="button"
                 className="gallery-button"
@@ -65,6 +71,10 @@ export function Gallery() {
               >
                 <Img src={g.src} alt={g.alt} />
               </button>
+              <figcaption className="g-cap">
+                <span>{g.cap}</span>
+                {g.capEm && <em>{g.capEm}</em>}
+              </figcaption>
             </Reveal>
           ))}
         </div>
