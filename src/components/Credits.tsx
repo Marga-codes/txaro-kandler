@@ -1,162 +1,223 @@
-import { campaign, posters } from '../content'
-import { Img, Reveal, Video } from './Primitives'
+import { useRef, useState } from 'react'
+import { url } from '../media'
+import { Img, delayStyle } from './Primitives'
+import { PlayIcon } from './Icons'
 
-/** Trabajos destacados: una sola seccion con cuatro grupos, como el original. */
+const posters = [
+  {
+    src: '/media/img/WhatsApp-Image-2026-08-23-at-13-48-08.webp',
+    alt: 'Hambre',
+    category: 'teatro',
+    title: 'Hambre',
+    meta: '2026 · Teatro · Carolina María de Jesús',
+  },
+  {
+    src: '/media/img/el-hoyo-2-poster.webp',
+    alt: 'El Hoyo 2',
+    category: 'cine',
+    title: 'El Hoyo 2',
+    meta: '2024 · Película · Bárbara',
+  },
+  {
+    src: '/media/img/santuario-poster.webp',
+    alt: 'Santuario',
+    category: 'television',
+    title: 'Santuario',
+    meta: '2024 · Serie de TV · HBO Max',
+  },
+]
+
+const publicidad = [
+  {
+    src: '/media/Txaro_Fotos/txaro-kandler-actriz-en-barco-01.webp',
+    alt: 'Txaro Kandler — actriz en barco 01',
+    tag: '01',
+    cap: 'Campaña · 01',
+  },
+  {
+    src: '/media/Txaro_Fotos/txaro-kandler-actriz-en-barco-02.webp',
+    alt: 'Txaro Kandler — actriz en barco 02',
+    tag: '02',
+    cap: 'Campaña · 02',
+  },
+  {
+    src: '/media/Txaro_Fotos/txaro-kandler-actriz-en-barco-03.webp',
+    alt: 'Txaro Kandler — actriz en barco 03',
+    tag: '03',
+    cap: 'Campaña · 03',
+  },
+  {
+    src: '/media/Txaro_Fotos/txaro-kandler-actriz-en-barco-04.webp',
+    alt: 'Txaro Kandler — actriz en barco 04',
+    tag: '04',
+    cap: 'Campaña · 04',
+  },
+]
+
+/** Tira de video estilo pelicula: clic (o Enter/espacio) para reproducir. */
+function ShowreelVideo({ src, label }: { src: string; label: string }) {
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const [playing, setPlaying] = useState(false)
+
+  const play = () => {
+    const v = videoRef.current
+    if (!v || playing) return
+    v.controls = true
+    void v.play()
+    setPlaying(true)
+  }
+
+  return (
+    <div
+      className={`showreel-video reveal${playing ? ' playing' : ''}`}
+      style={delayStyle(120)}
+      role="button"
+      tabIndex={0}
+      aria-label={label}
+      onClick={play}
+      onKeyDown={e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          play()
+        }
+      }}
+    >
+      <video ref={videoRef} src={url(src)} preload="metadata" playsInline muted />
+      <div className="play-btn" aria-hidden="true">
+        <PlayIcon size={18} />
+      </div>
+    </div>
+  )
+}
+
+const cineLorem = [
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+  'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+]
+
+function CineText() {
+  return (
+    <div className="cine-text reveal" style={delayStyle(200)}>
+      <h3 className="cine-title">
+        Lorem ipsum <em>dolor sit amet</em>
+      </h3>
+      {cineLorem.map(t => (
+        <p key={t} className="cine-desc">
+          {t}
+        </p>
+      ))}
+    </div>
+  )
+}
+
 export function Credits() {
   return (
-    <section className="section credits" id="credits">
-      <div className="shell">
-        <div className="section-head reveal">
+    <section className="credits" id="credits">
+      <div className="credits-header reveal">
+        <div>
           <p className="section-label">Trabajos</p>
           <h2 className="section-title">Trabajos destacados</h2>
         </div>
-
-        <Poster />
-        <Campaign />
-        <Cine />
-        <Backstage />
       </div>
-    </section>
-  )
-}
 
-/** Cartelera: proporcion 2:1 en lugar de tres tarjetas iguales. */
-function Poster() {
-  const [featured, ...rest] = posters
-  return (
-    <div className="credits-group">
-      <Reveal as="p">
-        <span className="credits-group-label">Cartelera</span>
-      </Reveal>
-      <div className="poster-grid">
-        <PosterCard {...featured} />
-        <div className="poster-stack">
-          {rest.map(p => (
-            <PosterCard key={p.title} {...p} />
+      <div className="credits-group">
+        <p className="credits-group-label reveal">Cartelera</p>
+        <div className="credits-grid">
+          {posters.map((p, i) => (
+            <div
+              key={p.alt}
+              className="credit-card reveal"
+              style={i ? delayStyle(240 + (i - 1) * 120) : undefined}
+              data-category={p.category}
+            >
+              <Img src={p.src} alt={p.alt} />
+              <div className="credit-card-overlay">
+                <p className="credit-card-title">{p.title}</p>
+                <p className="credit-card-meta">{p.meta}</p>
+              </div>
+            </div>
           ))}
         </div>
       </div>
-    </div>
-  )
-}
 
-function PosterCard({
-  title,
-  meta,
-  src,
-  alt,
-}: {
-  title: string
-  meta: string
-  src: string
-  alt: string
-}) {
-  return (
-    <Reveal as="figure">
-      <div className="poster-card">
-        <Img src={src} alt={alt} />
-      </div>
-      <figcaption className="poster-caption">
-        <p className="poster-title">{title}</p>
-        <p className="poster-meta">{meta}</p>
-      </figcaption>
-    </Reveal>
-  )
-}
+      <div className="credits-group credits-group--publicidad">
+        <p className="credits-group-label reveal">Publicidad</p>
+        <div className="publicidad-gallery">
+          {publicidad.map((item, i) => (
+            <figure
+              key={item.tag}
+              className={`pub-item pub-photo reveal${i === 3 ? ' pub-photo--fill' : ''}`}
+              style={delayStyle(120 + i * 60)}
+            >
+              <div className="pub-frame">
+                <Img src={item.src} alt={item.alt} />
+              </div>
+              <span className="pub-tag" aria-hidden="true">
+                {item.tag}
+              </span>
+              <figcaption className="pub-cap">
+                <span>Actriz</span>
+                <em>{item.cap}</em>
+              </figcaption>
+            </figure>
+          ))}
 
-function Campaign() {
-  return (
-    <div className="credits-group">
-      <Reveal as="p">
-        <span className="credits-group-label">Publicidad</span>
-      </Reveal>
-      <div className="media-grid">
-        {campaign.slice(0, 2).map((c, i) => (
-          <Reveal key={c.src} delay={i * 80} className={`media-cell cell-${i === 0 ? 'a' : 'b'}`}>
-            <Img src={c.src} alt={c.alt} />
-          </Reveal>
-        ))}
-
-        <Reveal delay={160} className="media-cell cell-c">
-          <Video
-            src="/Txaro_videos/publicidad_video_Txaro_Kandler.mp4"
-            poster="/media/Txaro_Fotos/txaro-kandler-actriz-en-barco-03.webp"
-            label="Vídeo de la campaña"
-            muted
-            loop
-            playsInline
-            preload="none"
-          />
-        </Reveal>
-
-        <Reveal delay={240} className="media-cell cell-d">
-          <Img src={campaign[3].src} alt={campaign[3].alt} />
-        </Reveal>
-      </div>
-    </div>
-  )
-}
-
-function Cine() {
-  return (
-    <div className="credits-group">
-      <Reveal as="p">
-        <span className="credits-group-label">Cine</span>
-      </Reveal>
-      <div className="split-media reveal">
-        <Video
-          src="/Txaro_videos/Cine_actriz-txaro-kandler-02.mp4"
-          poster="/media/Txaro_Fotos/txaro-kandler-actriz-en-barco-02.webp"
-          label="Fragmento de cine"
-          controls
-          playsInline
-          preload="none"
-        />
-        <div>
-          <h3>
-            Trabajar el <em>espacio</em> antes que el gesto
-          </h3>
-          <p>
-            En cine la cámara se mueve y el cuerpo tiene que sostener la escena
-            desde el primer fotograma. La preparación en danza y danza-teatro
-            marca la diferencia en las tomas largas.
-          </p>
-          <p>
-            El Hoyo 2 y Santuario muestran esa misma disciplina aplicada a
-            formatos de terror y thriller.
-          </p>
+          <figure className="pub-item pub-video reveal" style={delayStyle(380)}>
+            <div className="pub-frame">
+              <video
+                src={url('/Txaro_videos/publicidad_video_Txaro_Kandler.mp4')}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                controls
+              />
+            </div>
+            <span className="pub-tag" aria-hidden="true">
+              05
+            </span>
+            <figcaption className="pub-cap">
+              <span>Actriz</span>
+              <em>Campaña · Vídeo</em>
+            </figcaption>
+          </figure>
         </div>
       </div>
-    </div>
-  )
-}
 
-function Backstage() {
-  return (
-    <div className="credits-group">
-      <Reveal as="p">
-        <span className="credits-group-label">Backstage</span>
-      </Reveal>
-      <div className="split-media reveal split-media--flip">
-        <Video
-          src="/Txaro_videos/Backstage-actriz-txaro-kandler.mp4"
-          poster="/media/img/Txaro_Kandler_2.webp"
-          label="Vídeo de backstage"
-          controls
-          playsInline
-          preload="none"
-        />
-        <div>
-          <h3>
-            Lo que ocurre <em>fuera del plano</em>
-          </h3>
-          <p>
-            El trabajo de mesa, los ensayos y la concentración previo a cada
-            escena. Grabado durante la producción de Hambre en el Umbral de
-            Primavera.
-          </p>
+      <div className="credits-group credits-group--cine">
+        <p className="credits-group-label reveal">Cine</p>
+        <div className="cine-gallery">
+          <figure className="pub-item pub-video reveal" style={delayStyle(120)}>
+            <div className="pub-frame">
+              <video
+                src={url('/Txaro_videos/Cine_actriz-txaro-kandler-02.mp4')}
+                playsInline
+                muted
+                loop
+                preload="metadata"
+                controls
+              />
+            </div>
+            <span className="pub-tag" aria-hidden="true">
+              01
+            </span>
+            <figcaption className="pub-cap">
+              <span>Actriz</span>
+              <em>Cine · Vídeo</em>
+            </figcaption>
+          </figure>
+          <CineText />
         </div>
       </div>
-    </div>
+
+      <div className="credits-group credits-group--backstage">
+        <p className="credits-group-label reveal">Backstage</p>
+        <div className="backstage-gallery">
+          <CineText />
+          <ShowreelVideo src="/Txaro_videos/Backstage-actriz-txaro-kandler.mp4" label="Reproducir backstage" />
+        </div>
+      </div>
+    </section>
   )
 }

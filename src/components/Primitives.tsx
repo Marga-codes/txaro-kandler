@@ -1,6 +1,11 @@
 import type { ReactNode } from 'react'
 import { size, url } from '../media'
 
+/** CSSProperties ampliado para variables CSS propias (--reveal-delay...). */
+export type StyleVars = React.CSSProperties & Record<`--${string}`, string>
+
+export const delayStyle = (ms: number): StyleVars => ({ '--reveal-delay': `${ms}ms` })
+
 type ImgProps = {
   src: string
   alt: string

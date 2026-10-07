@@ -1,9 +1,13 @@
-import { useState } from 'react'
-import { contactLinks } from '../content'
-import { ArrowRight, ContactIcon } from './Icons'
-import { Reveal } from './Primitives'
-
-type Status = 'idle' | 'sending' | 'sent' | 'error'
+import { useRef, useState } from 'react'
+import type { FormEvent } from 'react'
+import { delayStyle } from './Primitives'
+import {
+  FilmaffinityIcon,
+  ImdbIcon,
+  InstagramIcon,
+  SendIcon,
+  WhatsappIcon,
+} from './Icons'
 
 const DISPOSABLE = new Set([
   'mailinator.com',
@@ -24,7 +28,7 @@ const emailFormatOk = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)
 async function domainReceivesMail(domain: string) {
   const query = async (type: string) => {
     const r = await fetch(
-      `https://dns.google/resolve?name=${encodeURIComponent(domain)}&type=${type}`
+      'https://dns.google/resolve?name=' + encodeURIComponent(domain) + '&type=' + type
     )
     if (!r.ok) throw new Error('dns')
     return (await r.json()).Answer || []
@@ -34,167 +38,159 @@ async function domainReceivesMail(domain: string) {
   return false
 }
 
+async function emailError(v: string) {
+  const domain = v.split('@')[1].toLowerCase()
+  if (DISPOSABLE.has(domain)) return 'No se aceptan direcciones de email temporales.'
+  try {
+    if (!(await domainReceivesMail(domain)))
+      return 'Ese dominio de email no existe o no puede recibir mensajes. Revisa la dirección.'
+  } catch {
+    return null
+  }
+  return null
+}
+
 export function Contact() {
-  const [status, setStatus] = useState<Status>('idle')
-  const [note, setNote] = useState('')
-  const [emailError, setEmailError] = useState('')
+  const formRef = useRef<HTMLFormElement>(null)
+  const emailRef = useRef<HTMLInputElement>(null)
+  const [note, setNote] = useState<{ msg: string; isError: boolean } | null>(null)
+  const [sending, setSending] = useState(false)
 
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const form = e.currentTarget
-    const data = new FormData(form)
+    const form = formRef.current
+    const email = emailRef.current
+    if (!form || !email) return
+    if ((form.querySelector('[name="_honey"]') as HTMLInputElement)?.value) return
 
-    if (data.get('_honey')) return
-
-    const email = String(data.get('email') ?? '').trim()
-    if (!emailFormatOk(email)) {
-      setEmailError('Introduce un email válido (nombre@dominio.com).')
-      return
-    }
-    setEmailError('')
-
-    const domain = email.split('@')[1].toLowerCase()
-    if (DISPOSABLE.has(domain)) {
-      setEmailError('No se aceptan direcciones de email temporales.')
+    const value = email.value.trim()
+    if (!emailFormatOk(value)) {
+      email.setAttribute('aria-invalid', 'true')
+      email.focus()
+      setNote({ msg: 'Introduce un email válido (nombre@dominio.com).', isError: true })
       return
     }
 
-    try {
-      if (!(await domainReceivesMail(domain))) {
-        setEmailError('Ese dominio no existe o no puede recibir mensajes.')
-        return
-      }
-    } catch {
-      // Sin DNS disponible no se bloquea el envío.
+    setSending(true)
+    setNote(null)
+    const errorMsg = await emailError(value)
+    if (errorMsg) {
+      setSending(false)
+      email.setAttribute('aria-invalid', 'true')
+      setNote({ msg: errorMsg, isError: true })
+      return
     }
-
-    setStatus('sending')
-    setNote('Verificando el dominio...')
+    email.removeAttribute('aria-invalid')
 
     try {
-      const res = await fetch(
-        'https://formsubmit.co/ajax/txarokandler@gmail.com',
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify(Object.fromEntries(data.entries())),
-        }
-      )
+      const data = Object.fromEntries(new FormData(form).entries())
+      const res = await fetch('https://formsubmit.co/ajax/txarokandler@gmail.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(data),
+      })
       if (!res.ok) throw new Error(String(res.status))
       form.reset()
-      setStatus('sent')
-      setNote('Mensaje enviado. Te responderé lo antes posible.')
+      setNote({ msg: 'Mensaje enviado. Te responderé lo antes posible.', isError: false })
     } catch {
-      setStatus('error')
-      setNote(
-        'No se pudo enviar. Escríbeme directamente a txarokandler@gmail.com o por WhatsApp.'
-      )
+      setNote({
+        msg: 'No se pudo enviar. Escríbeme directamente a txarokandler@gmail.com o por WhatsApp.',
+        isError: true,
+      })
+    } finally {
+      setSending(false)
     }
   }
 
   return (
-    <section className="section contact" id="contact">
-      <div className="shell contact-inner">
-        <Reveal>
-          <div className="section-head">
-            <p className="section-label">Contacto</p>
-            <h2 className="section-title">
-              Trabajemos <em>juntos</em>
-            </h2>
-          </div>
+    <section className="contact" id="contact">
+      <form className="contact-form reveal" id="contact-form" ref={formRef} onSubmit={handleSubmit}>
+        <p className="section-label">Contacto</p>
+        <h2 className="section-title">
+          Trabajemos <em>juntos</em>
+        </h2>
+        <input type="text" name="_honey" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
+        <input type="hidden" name="_subject" value="Contacto web — Txaro Kandler" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input
+          type="hidden"
+          name="_autoresponse"
+          value="Gracias por tu mensaje. Te responderé lo antes posible."
+        />
+        <div className="form-row">
+          <label htmlFor="name">Nombre</label>
+          <input type="text" id="name" name="name" placeholder="Tu nombre" autoComplete="name" required />
+        </div>
+        <div className="form-row">
+          <label htmlFor="email">Email</label>
+          <input
+            ref={emailRef}
+            type="email"
+            id="email"
+            name="email"
+            placeholder="tu@email.com"
+            autoComplete="email"
+            required
+            onInput={e => {
+              e.currentTarget.removeAttribute('aria-invalid')
+              setNote(n => (n?.isError ? null : n))
+            }}
+          />
+        </div>
+        <div className="form-row form-row--area">
+          <label htmlFor="message">Mensaje</label>
+          <textarea
+            id="message"
+            name="message"
+            rows={3}
+            placeholder="Cuéntame sobre tu proyecto..."
+            required
+          />
+        </div>
+        <button type="submit" className="form-submit" disabled={sending}>
+          {sending ? 'Enviando…' : 'Enviar mensaje'}
+          <SendIcon size={14} />
+        </button>
+        <p
+          className={`form-note${note?.isError ? ' is-error' : ''}`}
+          id="form-note"
+          role="status"
+          aria-live="polite"
+        >
+          {note?.msg ?? ''}
+        </p>
+      </form>
 
-          <form className="form" onSubmit={onSubmit} noValidate>
-            <input
-              type="text"
-              name="_honey"
-              tabIndex={-1}
-              autoComplete="off"
-              hidden
-            />
-            <input type="hidden" name="_subject" value="Contacto web, Txaro Kandler" />
-            <input type="hidden" name="_template" value="table" />
-            <input
-              type="hidden"
-              name="_autoresponse"
-              value="Gracias por tu mensaje. Te responderé lo antes posible."
-            />
-
-            <div className="field">
-              <label htmlFor="name">Nombre</label>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                placeholder="Tu nombre"
-                autoComplete="name"
-                required
-              />
-            </div>
-
-            <div className="field">
-              <label htmlFor="email">Email</label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                placeholder="tu@email.com"
-                autoComplete="email"
-                required
-                aria-invalid={emailError ? 'true' : undefined}
-                aria-describedby={emailError ? 'email-error' : undefined}
-              />
-              {emailError && (
-                <p className="field-error" id="email-error">
-                  {emailError}
-                </p>
-              )}
-            </div>
-
-            <div className="field">
-              <label htmlFor="message">Mensaje</label>
-              <textarea
-                id="message"
-                name="message"
-                rows={4}
-                placeholder="Cuéntame sobre tu proyecto..."
-                required
-              />
-            </div>
-
-            <button className="form-submit" type="submit" disabled={status === 'sending'}>
-              {status === 'sending' ? 'Enviando...' : 'Enviar mensaje'}
-              <ArrowRight size={14} />
-            </button>
-
-            <p className="form-status" role="status" aria-live="polite">
-              {note}
-            </p>
-          </form>
-        </Reveal>
-
-        <Reveal delay={120}>
-          <div className="contact-info">
-            <h3>Información de contacto</h3>
-            <p>
-              Para consultas profesionales, representación o colaboraciones, no
-              dudes en contactarme.
-            </p>
-            <div className="contact-links">
-              {contactLinks.map(l => (
-                <a
-                  key={l.href}
-                  className="contact-link"
-                  href={l.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <ContactIcon name={l.icon} size={18} />
-                  {l.label}
-                </a>
-              ))}
-            </div>
-          </div>
-        </Reveal>
+      <div className="contact-info reveal" style={delayStyle(120)}>
+        <h3>Información de contacto</h3>
+        <p>
+          Para consultas profesionales, representacion o colaboraciones, no dudes
+          en contactarme.
+        </p>
+        <div className="contact-links">
+          <a href="https://www.instagram.com/txarokandler/" className="contact-link" target="_blank" rel="noreferrer">
+            <InstagramIcon size={18} />
+            @txarokandler
+          </a>
+          <a href="https://wa.me/34678857374" className="contact-link" target="_blank" rel="noopener">
+            <WhatsappIcon size={18} />
+            WhatsApp · +34 678 85 73 74
+          </a>
+          <a href="https://www.imdb.com/name/nm14579927/" className="contact-link" target="_blank" rel="noreferrer">
+            <ImdbIcon size={18} />
+            IMDb Profile
+          </a>
+          <a
+            href="https://www.filmaffinity.com/es/name.php?name-id=410288855"
+            className="contact-link"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <FilmaffinityIcon size={18} />
+            Filmaffinity
+          </a>
+        </div>
       </div>
     </section>
   )
